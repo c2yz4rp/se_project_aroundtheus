@@ -45,6 +45,7 @@
   width: 24px;
   grid-area: button;
   margin-left: 18px;
+  border-color: #fff;
 }
 
 .profile__edit-button:hover {
@@ -56,6 +57,7 @@
   height: 50px;
   width: 150px;
   margin-left: auto;
+  border-color: #fff;
 }
 
 .profile__add-button:hover {

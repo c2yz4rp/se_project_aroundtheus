@@ -21,6 +21,6 @@ This project is made so all the elements are displayed correctly on popular scre
 
 **Video**
 
-- [Link to the Video](https://c2yz4rp.github.io/se_project_aroundtheus/)
+- [Link to the Video](https://drive.google.com/file/d/1Z9Q9W7upjqocuFDvrxSKSlbKRzYt0oSR/view?usp=sharing)
 
 Thankyou and Have a great day!
