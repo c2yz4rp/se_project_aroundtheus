@@ -11,7 +11,7 @@
   grid-template-areas:
     "title button"
     "description description";
-  grid-template-columns: minmax(auto, 373 px) auto;
+  grid-template-columns: minmax(auto, 373px) auto;
   align-items: center;
 }
 
@@ -140,6 +140,7 @@
     height: 18px;
     display: flex;
     align-self: center;
+    margin-top: 16px;
   }
 
   .profile__image {
