@@ -1,0 +1,12 @@
+.modal__container_type_preview {
+  display: flex;
+  background: transparent;
+  width: auto;
+  height: auto;
+  padding: 0;
+}
+
+.modal__preview-image {
+  max-width: 75vw;
+  max-height: 75vh;
+}
