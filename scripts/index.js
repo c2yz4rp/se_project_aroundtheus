@@ -76,6 +76,44 @@ function renderCard(cardData, wrapper) {
   wrapper.prepend(cardElement);
 }
 
+function openModal(modal) {
+  modal.classList.add("modal_opened");
+
+  document.addEventListener("keydown", handleEscKey);
+  modal.addEventListener("mousedown", handleOverlayClick);
+}
+
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
+
+  document.removeEventListener("keydown", handleEscKey);
+
+  modal.removeEventListener("mousedown", handleOverlayClick);
+}
+
+function handleEscKey(evt) {
+  if (evt.key === "Escape") {
+    const modalOpened = document.querySelector(".modal_opened");
+    closePopup(modalOpened);
+  }
+}
+
+function handleOverlayClick(evt) {
+  if (evt.target.classList.contains("modal-overlay")) {
+    const modalOpened = document.querySelector(".modal_opened");
+
+    closePopup(modalOpened);
+  }
+}
+
+function openModal(modal) {
+  modal.classList.add("modal_opened");
+  currentPopup = modal;
+
+  document.addEventListener("keydown", handleEscKey);
+  document.addEventListener("click", handleOverlayClick);
+}
+
 function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileName.textContent = profileNameInput.value;
