@@ -101,17 +101,23 @@
             maxlength="30"
             required
           />
-          <span class="modal__popup-error" id="add-card-title-error"></span>
+          <span class="modal__popup-error" id="card-title-input-error"></span>
           <input
-            type="text"
+            type="url"
             name="url"
             id="card-url-input"
             class="modal__form-input"
             placeholder="Image URL"
             required
           />
-          <span class="modal__popup-error" id="add-card-url-error"></span>
-          <button class="modal__save" type="submit">Create</button>
+          <span class="modal__popup-error" id="card-url-input-error"></span>
+          <button
+            class="modal__save modal__save_disabled"
+            type="submit"
+            disabled
+          >
+            Create
+          </button>
         </form>
       </div>
     </div>

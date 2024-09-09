@@ -97,6 +97,15 @@
   font-weight: 400;
 }
 
+.modal__form-input:invalid {
+  padding: 0;
+  width: 100%;
+  height: 27px;
+  border: none;
+  border-bottom: 1px solid #ff0000;
+  display: flex;
+}
+
 .modal__popup-error {
   width: 164px;
   height: 12px;
@@ -108,7 +117,7 @@
   color: #ff0000;
 }
 
-.modal__save_disabled {
+.modal__save:disabled {
   color: #fff;
   opacity: 20%;
 }
