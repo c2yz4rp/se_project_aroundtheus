@@ -61,17 +61,6 @@ function enableValidation(options) {
 
     setEventListeners(formEl, options);
   });
-  // const inputEls = formEl.querySelectorAll(".modal__form");
-  // function checkInputValidity(formEl, inputEl, options) {
-  //  if (!inputEl.validity.valid) {
-  //     return showInputError(formEl, inputEl, options);
-  //   }
-
-  //    hideInputError(formEl, inputEl, options);
-  // }
-
-  //  function hasInvalidInput(inputList) {
-  //    return !inputList.every((inputEl) => inputEl.validity.valid);
 }
 
 const config = {
