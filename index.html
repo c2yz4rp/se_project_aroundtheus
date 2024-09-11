@@ -50,34 +50,38 @@
         <button class="modal__close" type="button"></button>
         <p class="modal__heading">Edit Profile</p>
         <form class="modal__form">
-          <input
-            type="text"
-            name="Name"
-            id="profile-name-input"
-            class="modal__form-input"
-            placeholder="Name"
-            minlength="2"
-            maxlength="40"
-            required
-          />
-          <span
-            class="modal__error modal__error-title"
-            id="profile-name-input-error"
-          ></span>
-          <input
-            type="text"
-            name="About me"
-            id="profile-description-input"
-            class="modal__form-input"
-            placeholder="Description"
-            minlength="2"
-            maxlength="200"
-            required
-          />
-          <span
-            class="modal__error modal__error-description"
-            id="profile-description-input-error"
-          ></span>
+          <label for="profile-name-input" class="modal__form-label">
+            <input
+              type="text"
+              name="Name"
+              id="profile-name-input"
+              class="modal__form-input"
+              placeholder="Name"
+              minlength="2"
+              maxlength="40"
+              required
+            />
+            <span
+              class="modal__error modal__error-title"
+              id="profile-name-input-error"
+            ></span>
+          </label>
+          <label for="profile-description-input" class="modal__form-label">
+            <input
+              type="text"
+              name="About me"
+              id="profile-description-input"
+              class="modal__form-input"
+              placeholder="Description"
+              minlength="2"
+              maxlength="200"
+              required
+            />
+            <span
+              class="modal__error modal__error-description"
+              id="profile-description-input-error"
+            ></span>
+          </label>
           <button
             type="submit"
             class="modal__save modal__save_disabled"
@@ -94,32 +98,36 @@
         <button class="modal__close" type="button"></button>
         <p class="modal__heading">New Place</p>
         <form class="modal__form">
-          <input
-            type="text"
-            name="Title"
-            id="card-title-input"
-            class="modal__form-input"
-            placeholder="Title"
-            minlength="1"
-            maxlength="30"
-            required
-          />
-          <span
-            class="modal__error modal__error-title"
-            id="card-title-input-error"
-          ></span>
-          <input
-            type="url"
-            name="url"
-            id="card-url-input"
-            class="modal__form-input"
-            placeholder="Image URL"
-            required
-          />
-          <span
-            class="modal__error modal__error-description"
-            id="card-url-input-error"
-          ></span>
+          <label for="card-title-input" class="modal__form-label">
+            <input
+              type="text"
+              name="Title"
+              id="card-title-input"
+              class="modal__form-input"
+              placeholder="Title"
+              minlength="1"
+              maxlength="30"
+              required
+            />
+            <span
+              class="modal__error modal__error-title"
+              id="card-title-input-error"
+            ></span>
+          </label>
+          <label for="card-url-input" class="modal__form-label">
+            <input
+              type="url"
+              name="url"
+              id="card-url-input"
+              class="modal__form-input"
+              placeholder="Image URL"
+              required
+            />
+            <span
+              class="modal__error modal__error-description"
+              id="card-url-input-error"
+            ></span>
+          </label>
           <button
             class="modal__save modal__save_disabled"
             type="submit"
