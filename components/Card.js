@@ -7,7 +7,8 @@ export default class Card {
   }
 
   _setEventListeners() {
-    //this._cardElement.querySelector(".card__name").textContent = this._name;
+    this._cardElement.querySelector(".card__description-text").textContent =
+      this._name;
 
     this._cardElement
       .querySelector(".card__like-button")
@@ -30,7 +31,7 @@ export default class Card {
 
   _handleDeleteCard() {
     this._cardElement.remove();
-    this._cardElement = null;
+    //this._cardElement = null;
   }
 
   _handleLikeIcon() {
@@ -46,8 +47,10 @@ export default class Card {
       .cloneNode(true);
 
     //get the card view
-    // this._cardElement.querySelector(".card__name").textContent = this._name;
-    // this._cardElement.querySelector(".card__image").src = this._link;
+    this._cardElement.querySelector(".card__description-text").textContent =
+      this._name;
+    this._cardElement.querySelector(".card__image").src = this._link;
+    this._cardElement.querySelector(".card__image").alt = this._name;
 
     //set event listeners
     this._setEventListeners();

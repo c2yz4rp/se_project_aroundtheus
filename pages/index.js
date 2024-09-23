@@ -33,8 +33,14 @@ const cardData = {
   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
 };
 
-const card = new Card(cardData, "#card-template");
-card.getView();
+function getCardElement(cardData) {
+  const card = new Card(cardData, "#card-template", onImagePreview).getView();
+  return card;
+}
+function renderCard(cardData, wrapper) {
+  const cardElement = getCardElement(cardData);
+  wrapper.prepend(cardElement);
+}
 
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
@@ -42,9 +48,6 @@ const profileaddModal = document.querySelector("#profile-add-modal");
 const previewImageModalWindow = document.querySelector(".modal_type_preview");
 const previewImageDescription =
   previewImageModalWindow.querySelector("#modal-caption");
-const previewImageElement = previewImageModalWindow.querySelector(
-  ".modal__preview-image"
-);
 
 const profileEditCloseButton = profileEditModal.querySelector(".modal__close");
 const profileaddModalCloseButton =
@@ -88,11 +91,6 @@ function closePopup(popup) {
   popup.removeEventListener("mousedown", handleOverlayClick);
 }
 
-function renderCard(cardData, wrapper) {
-  const cardElement = getCardElement(cardData);
-  wrapper.prepend(cardElement);
-}
-
 function handleEscKey(evt) {
   if (evt.key === "Escape") {
     const modalOpened = document.querySelector(".modal_opened");
@@ -122,42 +120,15 @@ function handleAddCardSubmit(evt) {
   closePopup(profileaddModal);
 }
 
-function getCardElement(cardData) {
-  const cardTemplate = document.querySelector("#card-template").content;
-  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-  const cardImageEl = cardElement.querySelector(".card__image");
-
-  const cardTitleEl = cardElement.querySelector(".card__description-text");
-  const likeButton = cardElement.querySelector(".card__like-button");
-
-  //cardImageEl.addEventListener("click", () => onImagePreview(cardData));
-
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
-  });
-
-  cardImageEl.src = cardData.link;
-  cardImageEl.alt = cardData.name;
-  cardTitleEl.textContent = cardData.name;
-
-  const cardDeleteBtn = cardElement.querySelector(".card__delete-button");
-
-  cardDeleteBtn.addEventListener("click", () => {
-    cardElement.remove();
-  });
-
-  cardImageEl.addEventListener("click", () => {
-    previewImageElement.src = cardData.link;
-    previewImageElement.alt = cardData.name;
-    previewImageDescription.textContent = cardData.name;
-
-    openPopup(previewImageModalWindow);
-  });
-
-  console.log(cardElement);
-
-  return cardElement;
-}
+const onImagePreview = (cardData) => {
+  const previewImageElement = previewImageModalWindow.querySelector(
+    "modal__preview-image"
+  );
+  previewImageElement.src = cardData._link;
+  previewImageElement.alt = cardData._name;
+  previewImageDescription.textContent = cardData._name;
+  openPopup(previewImageModalWindow);
+};
 
 profileEditButton.addEventListener("click", () => {
   profileNameInput.value = profileName.textContent;
@@ -165,12 +136,38 @@ profileEditButton.addEventListener("click", () => {
   openPopup(profileEditModal);
 });
 
+profileEditCloseButton.addEventListener("click", () =>
+  closePopup(profileEditModal)
+);
+
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 addNewCardButton.addEventListener("click", () => {
   openPopup(profileaddModal);
 });
 
+profileaddModalCloseButton.addEventListener("click", () =>
+  closePopup(profileaddModal)
+);
+
 addCardForm.addEventListener("submit", handleAddCardSubmit);
 
+previewImageCloseButton.addEventListener("click", () => {
+  closePopup(previewImageModalWindow);
+});
+
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
+
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__form-input",
+  submitButtonSelector: ".modal__save",
+  inactiveButtonClass: "modal__save_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+const editFormValidator = new FormValidator(config, profileEditModal);
+const addFormValidator = new FormValidator(config, profileaddModal);
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
