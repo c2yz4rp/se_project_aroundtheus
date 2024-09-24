@@ -122,7 +122,7 @@ function handleAddCardSubmit(evt) {
 
 const onImagePreview = (cardData) => {
   const previewImageElement = previewImageModalWindow.querySelector(
-    "modal__preview-image"
+    ".modal__preview-image"
   );
   previewImageElement.src = cardData._link;
   previewImageElement.alt = cardData._name;
