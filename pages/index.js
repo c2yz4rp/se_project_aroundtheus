@@ -136,25 +136,13 @@ profileEditButton.addEventListener("click", () => {
   openPopup(profileEditModal);
 });
 
-profileEditCloseButton.addEventListener("click", () =>
-  closePopup(profileEditModal)
-);
-
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 addNewCardButton.addEventListener("click", () => {
   openPopup(profileaddModal);
 });
 
-profileaddModalCloseButton.addEventListener("click", () =>
-  closePopup(profileaddModal)
-);
-
 addCardForm.addEventListener("submit", handleAddCardSubmit);
-
-previewImageCloseButton.addEventListener("click", () => {
-  closePopup(previewImageModalWindow);
-});
 
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
 
@@ -169,5 +157,16 @@ const config = {
 
 const editFormValidator = new FormValidator(config, profileEditModal);
 const addFormValidator = new FormValidator(config, profileaddModal);
+
+//const formValidators = {};
+
+//const enableValidation = (config) => {
+//const formList = Array.form(document.querySelectorAll(config.formSelector));
+// formList.forEach((formElement) => {
+//   const validator = new FormValidator(config, formElement);
+//   const editFormValidator = formElement.getAttribute("");
+// });
+//};
+
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
