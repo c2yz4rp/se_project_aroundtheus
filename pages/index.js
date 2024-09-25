@@ -116,9 +116,9 @@ function handleAddCardSubmit(evt) {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardListEl);
-  evt.target.reset();
+  addCardForm.reset();
   closePopup(profileaddModal);
-  _disableButton();
+  addFormValidator.disableButton();
 }
 
 const onImagePreview = (cardData) => {
@@ -158,16 +158,6 @@ const config = {
 
 const editFormValidator = new FormValidator(config, profileEditModal);
 const addFormValidator = new FormValidator(config, profileaddModal);
-
-//const formValidators = {};
-
-//const enableValidation = (config) => {
-//const formList = Array.form(document.querySelectorAll(config.formSelector));
-// formList.forEach((formElement) => {
-//   const validator = new FormValidator(config, formElement);
-//   const editFormValidator = formElement.getAttribute("");
-// });
-//};
 
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
