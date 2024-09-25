@@ -118,6 +118,7 @@ function handleAddCardSubmit(evt) {
   renderCard({ name, link }, cardListEl);
   evt.target.reset();
   closePopup(profileaddModal);
+  _disableButton();
 }
 
 const onImagePreview = (cardData) => {
