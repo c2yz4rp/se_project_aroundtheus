@@ -37,10 +37,3 @@ export default class PopupWithForm extends Popup {
     super.setEventListeners();
   }
 }
-
-// index.js
-
-const newCardPopup = new PopupWithForm("#profile-add-modal", () => {});
-newCardPopup.open();
-
-newCardPopup.close();

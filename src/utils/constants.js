@@ -53,12 +53,11 @@ export const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 export const closeButtons = document.querySelectorAll(".modal__close");
 
-export const onImagePreview = (cardData) => {
-  const previewImageElement = previewImageModalWindow.querySelector(
-    ".modal__preview-image"
-  );
-  previewImageElement.src = cardData._link;
-  previewImageElement.alt = cardData._name;
-  previewImageDescription.textContent = cardData._name;
-  openPopup(previewImageModalWindow);
+export const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__form-input",
+  submitButtonSelector: ".modal__save",
+  inactiveButtonClass: "modal__save_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
 };
