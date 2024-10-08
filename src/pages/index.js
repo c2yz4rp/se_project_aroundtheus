@@ -84,14 +84,25 @@ const CardSection = new Section(
 
 CardSection.renderItems();
 
+// Render Cards
+function renderCard(item, method = "addItem") {
+  const cardElement = createCard(item);
+  CardSection[method](cardElement);
+}
+
 //Functions
+function createCard(cardData) {
+  const card = new Card(cardData, "#card-template", handleImageClick);
+  return card.getView();
+}
+
 function handleProfileEditSubmit({ inputData }) {
   userInfo.setUserInfo({
     name: inputData.name,
     description: inputData.description,
   });
 
-  profileModal.close();
+  profileEditPopup.close();
 }
 
 function handleAddCardSubmit({ inputData, form }) {
@@ -103,21 +114,10 @@ function handleAddCardSubmit({ inputData, form }) {
 profileEditButton.addEventListener("click", () => {
   editProfileFormValidator.resetValidation();
   const userData = userInfo.getUserInfo();
-  profileModal.setInputValues({
+  profileEditPopup.setInputValues({
     name: userData.name,
     description: userData.description,
   });
 
-  profileModal.open();
+  profileEditPopup.open();
 });
-
-function createCard(cardData) {
-  const card = new Card(cardData, "#card-template", handleImageClick);
-  return card.getView();
-}
-
-// Render Cards
-function renderCard(item, method = "addItem") {
-  const cardElement = createCard(item);
-  CardSection[method](cardElement);
-}
