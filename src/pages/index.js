@@ -101,7 +101,7 @@ function createCard(cardData) {
 function handleProfileEditSubmit(inputData) {
   userInfo.setUserInfo({
     name: inputData.name,
-    description: inputData.job,
+    description: inputData.description,
   });
 
   profileEditPopup.close();
