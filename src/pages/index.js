@@ -98,10 +98,10 @@ function createCard(cardData) {
   return card.getView();
 }
 
-function handleProfileEditSubmit({ inputData }) {
+function handleProfileEditSubmit(inputData) {
   userInfo.setUserInfo({
     name: inputData.name,
-    description: inputData.description,
+    description: inputData.job,
   });
 
   profileEditPopup.close();
@@ -110,7 +110,7 @@ function handleProfileEditSubmit({ inputData }) {
 function handleAddCardSubmit(inputData) {
   const cardData = {
     name: inputData.title,
-    link: inputData.link,
+    link: inputData.url,
   };
   renderCard(cardData);
   addCardFormValidator.toggleButtonState();

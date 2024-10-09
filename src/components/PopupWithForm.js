@@ -6,30 +6,18 @@ export default class PopupWithForm extends Popup {
     this._popupForm = this._popupElement.querySelector(".modal__form");
     this._handleFormSubmit = handleFormSubmit;
     this._inputList = this._popupForm.querySelectorAll(".modal__form-input");
-    this.setEventListeners();
   }
 
   getForm() {
     return this._popupForm;
   }
 
-  //close() {
-  //  this._popupForm.reset();
-  //  super.close();
-  //}
-
-  //open() {
-  //  this._popupElement.classList.add("modal_opened");
-  //  document.addEventListener("keydown", this._handleEscClose);
-  //  super.open();
-  //}
-
   _getInputValues() {
-    this._formValues = {};
+    this._inputData = {};
     this._inputList.forEach((input) => {
-      this._formValues[input.name] = input.value;
+      this._inputData[input.name] = input.value;
     });
-    return this._formValues;
+    return this._inputData;
   }
 
   setInputValues(data) {
@@ -39,14 +27,11 @@ export default class PopupWithForm extends Popup {
   }
 
   setEventListeners() {
-    super.setEventListeners();
     this._popupForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this._handleFormSubmit({
-        inputData: this._getInputValues(),
-        form: this.getForm(),
-      });
+      this._handleFormSubmit(this._getInputValues());
       this.close();
     });
+    super.setEventListeners();
   }
 }

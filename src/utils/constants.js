@@ -35,9 +35,7 @@ export const previewImageDescription =
   previewImageModalWindow.querySelector("#modal-caption");
 
 export const profileName = document.querySelector(".profile__title");
-export const profileDescription = document.querySelector(
-  ".profile__description"
-);
+export const profileJob = document.querySelector(".profile__description");
 export const profileNameInput = document.querySelector("#profile-name-input");
 export const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
