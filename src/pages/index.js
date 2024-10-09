@@ -6,6 +6,8 @@ import {
   profileEditButton,
   cardListEl,
   config,
+  addNewCardButton,
+  addCardForm,
 } from "../utils/constants.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
@@ -105,18 +107,28 @@ function handleProfileEditSubmit({ inputData }) {
   profileEditPopup.close();
 }
 
-function handleAddCardSubmit({ inputData, form }) {
-  renderCard(inputData);
-  form.reset();
+function handleAddCardSubmit(inputData) {
+  const cardData = {
+    name: inputData.title,
+    link: inputData.link,
+  };
+  renderCard(cardData);
   addCardFormValidator.toggleButtonState();
+  addCardFormPopup.close();
+  addCardForm.reset();
 }
+
+addNewCardButton.addEventListener("click", () => {
+  addCardFormPopup.open();
+});
 
 profileEditButton.addEventListener("click", () => {
   editProfileFormValidator.resetValidation();
   const userData = userInfo.getUserInfo();
+  console.log(userData);
   profileEditPopup.setInputValues({
     name: userData.name,
-    description: userData.description,
+    description: userData.job,
   });
 
   profileEditPopup.open();
