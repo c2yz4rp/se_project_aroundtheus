@@ -14,12 +14,6 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 
-//Card Template
-const cardData = {
-  name: "Yosemite Valley",
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-};
-
 //Validation
 const formValidators = {};
 
@@ -76,7 +70,7 @@ function handleImageClick(cardData) {
 }
 
 //Section
-const CardSection = new Section(
+const cardSection = new Section(
   {
     items: initialCards,
     renderer: renderCard,
@@ -84,12 +78,12 @@ const CardSection = new Section(
   cardListEl
 );
 
-CardSection.renderItems();
+cardSection.renderItems();
 
 // Render Cards
 function renderCard(item, method = "addItem") {
   const cardElement = createCard(item);
-  CardSection[method](cardElement);
+  cardSection[method](cardElement);
 }
 
 //Functions
