@@ -107,7 +107,7 @@ function handleAddCardSubmit(inputData) {
     link: inputData.url,
   };
   renderCard(cardData);
-  addCardFormValidator.toggleButtonState();
+  addCardFormValidator.disableButton();
   addCardFormPopup.close();
   addCardForm.reset();
 }
