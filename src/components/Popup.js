@@ -28,9 +28,5 @@ export default class Popup {
         this.close();
       }
     });
-
-    document.addEventListener("keydown", (event) =>
-      this._handleEscClose(event)
-    );
   }
 }
