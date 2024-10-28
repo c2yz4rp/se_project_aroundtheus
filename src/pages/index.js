@@ -1,6 +1,8 @@
 import "./index.css";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
+import Api from "../components/Api.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import {
   initialCards,
   profileEditButton,
@@ -35,10 +37,20 @@ enableValidation(config);
 const addCardFormValidator = formValidators["add-card-form"];
 const editProfileFormValidator = formValidators["edit-card-form"];
 
+//API
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "1b9e6c44-417d-4f99-be38-392f1aa07612",
+    "Content-Type": "application/json",
+  },
+});
+
 //User Info
 const userInfo = new UserInfo({
   nameSelector: ".profile__title",
   jobSelector: ".profile__description",
+  profileImage: ".profile__image",
 });
 
 //const currentUserInfo = userInfo.getUserInfo();
@@ -88,7 +100,14 @@ function renderCard(item, method = "addItem") {
 
 //Functions
 function createCard(cardData) {
-  const card = new Card(cardData, "#card-template", handleImageClick);
+  const card = new Card(
+    cardData,
+    "#card-template",
+    handleImageClick,
+    handleDeleteCardSubmit,
+    likeCard,
+    unlikeCard
+  );
   return card.getView();
 }
 
@@ -97,19 +116,129 @@ function handleProfileEditSubmit(inputData) {
     name: inputData.name,
     job: inputData.description,
   });
+  profileEditPopup.setLoading(true);
+  api
+    .setUserInfo(formValues.title, formValues.description)
+    .then((res) => {
+      userInfo.getUserInfo(res.name, res.about);
+      editProfileModal.setLoading(false);
+    })
+    .catch((err) => {
+      console.error("Error updating user info", err);
+      alert(err);
+    });
 
   profileEditPopup.close();
 }
 
 function handleAddCardSubmit(inputData) {
-  const cardData = {
-    name: inputData.title,
-    link: inputData.url,
-  };
-  renderCard(cardData);
-  addCardFormValidator.disableButton();
-  addCardFormPopup.close();
-  addCardForm.reset();
+  const name = inputData.title;
+  const link = inputData.url;
+
+  cardAddForm.setLoading(true);
+  api
+    .uploadCard({ name, link })
+    .then((cardData) => {
+      const card = createCard(cardData);
+      cardAddForm.setLoading(false);
+      cardListEl.addItem(card);
+      addCardModal.close();
+      cardAddForm.reset();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+api
+  .getInitialCards()
+  .then((res) => {
+    console.log(res);
+    cardListEl.renderItems(res);
+  })
+
+  .catch((err) => alert(err));
+
+//Avatar
+const profileImageForm = document.querySelector("#edit-avatar-form");
+const profileFormValidator = new FormValidator(
+  validationConfig,
+  profileImageForm
+);
+profileFormValidator.enableValidation();
+
+function handleImageProfileEditSubmit(data) {
+  newProfileImageModal.setLoading(true);
+
+  api
+    .setUserAvatar(data.link)
+    .then((res) => {
+      userInfo.updateProfileImage(res);
+      newProfileImageModal.close();
+      profileImageForm.reset();
+      newProfileImageModal.setLoading(false);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
+
+const profileImageCover = document.querySelector(".profile__edit-image");
+profileImageCover.addEventListener("click", () => {
+  newProfileImageModal.open();
+});
+
+const newProfileImageModal = new PopupWithForm({
+  popupSelector: "#edit-avatar-modal",
+  handleFormSubmit: handleImageProfileEditSubmit,
+});
+newProfileImageModal.setEventListeners();
+
+// confirmation
+
+function handleDeleteCardSubmit(card) {
+  confirmModal.setSubmitAction(() => {
+    api
+      .deleteCard(card._id)
+      .then((res) => {
+        console.log(res);
+        card.remove();
+        confirmModal.close();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  });
+  confirmModal.open(card);
+}
+
+const confirmModal = new PopupWithConfirmation({
+  popupSelector: "#confirmation-modal",
+});
+confirmModal.setEventListeners();
+
+function likeCard(card) {
+  api
+    .likeCard(card._id)
+    .then((res) => {
+      console.log(res);
+      card.setIsLiked(true);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
+
+function unlikeCard(card) {
+  api
+    .unlikeCard(card._id)
+    .then((res) => {
+      console.log(res);
+      card.setIsLiked(false);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 }
 
 addNewCardButton.addEventListener("click", () => {
