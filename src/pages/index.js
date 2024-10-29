@@ -162,6 +162,14 @@ api
 
   .catch((err) => alert(err));
 
+api
+  .getUserInfo()
+  .then((res) => {
+    userInfo.setUserInfo(res);
+    userInfo.updateProfileImage(res);
+  })
+  .catch((err) => alert(err));
+
 //Avatar
 const profileImageForm = document.querySelector("#edit-avatar-form");
 const profileFormValidator = new FormValidator(config, profileImageForm);

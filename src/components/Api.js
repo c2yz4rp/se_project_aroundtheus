@@ -4,28 +4,34 @@ export default class Api {
     this._headers = headers;
   }
 
-  async getInitialCards() {
-    const res = await fetch(
-      "https://around-api.en.tripleten-services.com/v1/cards",
-      {
-        method: "GET",
-        headers: {
-          authorization: "1b9e6c44-417d-4f99-be38-392f1aa07612",
-        },
-      }
-    );
-    if (res.ok) {
-      return res.json();
-    }
-    return await Promise.reject(`Error: ${res.status}`);
-    // .catch((err) => {
-    //  console.error(err); // log the error to the console
+  getInitialCards() {
+    return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
+      method: "GET",
+      headers: {
+        authorization: "1b9e6c44-417d-4f99-be38-392f1aa07612",
+      },
+    }); //.then((res) => {
+    // if (res.ok) {
+    //   return res.json();
+    //}
+    //  return Promise.reject(`Error: ${res.status}`).catch((err) => {
+    //   console.error(err); // log the error to the console
+    // });
     // });
   }
 
   // other methods for working with the API
+  getUserInfo() {
+    return fetch("https://around-api.en.tripleten-services.com/v1/users/me", {
+      method: "GET",
+      headers: { ...this._headers },
+    }).then((res) =>
+      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+    );
+  }
+
   setUserInfo(name, about) {
-    return fetch(`${this._baseURL}/users/me`, {
+    return fetch("https://around-api.en.tripleten-services.com/v1/users/me", {
       method: "PATCH",
       headers: {
         ...this._headers,
