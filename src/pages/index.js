@@ -56,25 +56,25 @@ const userInfo = new UserInfo({
 //const currentUserInfo = userInfo.getUserInfo();
 
 //Profile Edit Form
-const profileEditPopup = new PopupWithForm(
-  "#profile-edit-modal",
-  handleProfileEditSubmit,
-  editProfileFormValidator
-);
+const profileEditPopup = new PopupWithForm({
+  popupSelector: "#profile-edit-modal",
+  handleFormSubmit: handleProfileEditSubmit,
+  editProfileFormValidator,
+});
 
 profileEditPopup.setEventListeners();
 
 //Add Card/Image Form
-const addCardFormPopup = new PopupWithForm(
-  "#profile-add-modal",
-  handleAddCardSubmit,
-  addCardFormValidator
-);
+const addCardFormPopup = new PopupWithForm({
+  popupSelector: "#profile-add-modal",
+  handleFormSubmit: handleAddCardSubmit,
+  addCardFormValidator,
+});
 
 addCardFormPopup.setEventListeners();
 
 // Preview Image Popup
-const imagePopup = new PopupWithImage(".modal_type_preview");
+const imagePopup = new PopupWithImage({ popupSelector: ".modal_type_preview" });
 imagePopup.setEventListeners();
 
 function handleImageClick(cardData) {
@@ -85,12 +85,15 @@ function handleImageClick(cardData) {
 const cardSection = new Section(
   {
     items: initialCards,
-    renderer: renderCard,
+    renderer: (item) => {
+      const cardELement = createCard(item);
+      cardSection.addItem(cardELement);
+    },
   },
-  cardListEl
+  ".card__list"
 );
 
-cardSection.renderItems();
+//cardSection.renderItems();
 
 // Render Cards
 function renderCard(item, method = "addItem") {
@@ -141,7 +144,7 @@ function handleAddCardSubmit(inputData) {
     .then((cardData) => {
       const card = createCard(cardData);
       cardAddForm.setLoading(false);
-      cardListEl.addItem(card);
+      cardSection.addItem(card);
       addCardModal.close();
       cardAddForm.reset();
     })
@@ -154,17 +157,14 @@ api
   .getInitialCards()
   .then((res) => {
     console.log(res);
-    cardListEl.renderItems(res);
+    cardSection.renderItems(res);
   })
 
   .catch((err) => alert(err));
 
 //Avatar
 const profileImageForm = document.querySelector("#edit-avatar-form");
-const profileFormValidator = new FormValidator(
-  validationConfig,
-  profileImageForm
-);
+const profileFormValidator = new FormValidator(config, profileImageForm);
 profileFormValidator.enableValidation();
 
 function handleImageProfileEditSubmit(data) {
