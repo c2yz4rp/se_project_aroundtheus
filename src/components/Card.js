@@ -7,8 +7,8 @@ export default class Card {
     likeCard,
     unlikeCard
   ) {
-    this._name = name;
-    this._link = link;
+    this.name = name;
+    this.link = link;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
     this._deleteCard = deleteCard;
@@ -65,11 +65,11 @@ export default class Card {
 
     //get the card view
     this._cardElement.querySelector(".card__description-text").textContent =
-      this._name;
+      this.name;
     this._likeButton = this._cardElement.querySelector(".card__like-button");
     this._cardImage = this._cardElement.querySelector(".card__image");
-    this._cardImage.src = this._link;
-    this._cardImage.alt = this._name;
+    this._cardImage.src = this.link;
+    this._cardImage.alt = this.name;
     this._deleteButton = this._cardElement.querySelector(
       ".card__delete-button"
     );

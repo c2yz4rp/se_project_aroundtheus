@@ -96,10 +96,10 @@ const cardSection = new Section(
 //cardSection.renderItems();
 
 // Render Cards
-function renderCard(item, method = "addItem") {
-  const cardElement = createCard(item);
-  cardSection[method](cardElement);
-}
+//function renderCard(item, method = "addItem") {
+// const cardElement = createCard(item);
+// cardSection[method](cardElement);
+//}
 
 //Functions
 function createCard(cardData) {
@@ -241,18 +241,18 @@ function unlikeCard(card) {
     });
 }
 
-addNewCardButton.addEventListener("click", () => {
-  addCardFormPopup.open();
-});
+//addNewCardButton.addEventListener("click", () => {
+//  addCardFormPopup.open();
+//});
 
-profileEditButton.addEventListener("click", () => {
-  editProfileFormValidator.resetValidation();
-  const userData = userInfo.getUserInfo();
-  console.log(userData);
-  profileEditPopup.setInputValues({
-    name: userData.name,
-    description: userData.job,
-  });
+//profileEditButton.addEventListener("click", () => {
+//  editProfileFormValidator.resetValidation();
+// const userData = userInfo.getUserInfo();
+//  console.log(userData);
+// profileEditPopup.setInputValues({
+//   name: userData.name,
+//   description: userData.job,
+// });
 
-  profileEditPopup.open();
-});
+//  profileEditPopup.open();
+//});
