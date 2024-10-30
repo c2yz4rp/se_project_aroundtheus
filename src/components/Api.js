@@ -10,14 +10,9 @@ export default class Api {
       headers: {
         authorization: "1b9e6c44-417d-4f99-be38-392f1aa07612",
       },
-    }); //.then((res) => {
-    // if (res.ok) {
-    //   return res.json();
-    //}
-    //  return Promise.reject(`Error: ${res.status}`).catch((err) => {
-    //   console.error(err); // log the error to the console
-    // });
-    // });
+    }).then((res) =>
+      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+    );
   }
 
   // other methods for working with the API

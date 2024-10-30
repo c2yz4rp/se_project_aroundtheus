@@ -90,7 +90,7 @@ const cardSection = new Section(
       cardSection.addItem(cardELement);
     },
   },
-  ".card__list"
+  ".cards__list"
 );
 
 //cardSection.renderItems();
