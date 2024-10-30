@@ -42,7 +42,7 @@ const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
     authorization: "1b9e6c44-417d-4f99-be38-392f1aa07612",
-    "Content-Type": "application/json",
+    // "Content-Type": "application/json",
   },
 });
 
@@ -111,7 +111,7 @@ function createCard(cardData) {
     likeCard,
     unlikeCard
   );
-  return card.getView();
+  return card.generateCard();
 }
 
 function handleProfileEditSubmit(inputData) {
