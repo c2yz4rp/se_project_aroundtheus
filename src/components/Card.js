@@ -1,28 +1,32 @@
 export default class Card {
   constructor(
-    { name, link },
+    data,
     cardSelector,
     handleImageClick,
     deleteCard,
     likeCard,
     unlikeCard
   ) {
-    this.name = name;
-    this.link = link;
+    this.name = data.name;
+    this.link = data.link;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
     this._deleteCard = deleteCard;
     this._likeCard = likeCard;
     this._unlikeCard = unlikeCard;
+    this._id = data._id;
+    this.isLiked = data.isLiked;
   }
 
-  _setEventListeners() {
+  setEventListeners() {
     //this._cardElement.querySelector(".card__description-text").textContent =
     // this._name;
 
+    this._likeButton = this._cardElement.querySelector(".card__like-button");
+
     this._likeButton.addEventListener("click", () => {
       this._likeCard(this);
-      this._handleLikeIcon();
+      // this._handleLikeIcon();
     });
 
     this._deleteButton.addEventListener("click", () => {
@@ -30,17 +34,17 @@ export default class Card {
     });
 
     this._cardImage.addEventListener("click", () => {
-      this._handleImageClick({ name: this.name, link: this.link });
+      this._handleImageClick(this);
     });
   }
 
   setIsLiked(isLiked) {
-    this._isLiked = isLiked;
+    this.isLiked = isLiked;
     this.setButtonState();
   }
 
   setButtonState() {
-    if (this._isLiked) {
+    if (this.isLiked) {
       this._likeButton.classList.add("card__like-button_active");
     } else {
       this._likeButton.classList.remove("card__like-button_active");
@@ -64,7 +68,7 @@ export default class Card {
     this._cardElement = this.getView();
     this._cardElement.querySelector(".card__description-text").textContent =
       this.name;
-    this._likeButton = this._cardElement.querySelector(".card__like-button");
+
     this._cardImage = this._cardElement.querySelector(".card__image");
     this._cardImage.src = this.link;
     this._cardImage.alt = this.name;
@@ -73,7 +77,8 @@ export default class Card {
     );
 
     //set event listeners
-    this._setEventListeners();
+    this.setEventListeners();
+    this.setButtonState();
 
     //return the card
     return this._cardElement;

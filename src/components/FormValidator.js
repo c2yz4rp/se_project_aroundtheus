@@ -1,11 +1,14 @@
 export default class FormValidator {
   constructor(config, formEl) {
-    this._inputSelector = config.inputSelector;
-    this._submitButtonSelector = config.submitButtonSelector;
+    //this._inputSelector = config.inputSelector;
+    //this._submitButtonSelector = config.submitButtonSelector;
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
     this._form = formEl;
+
+    this._inputEls = [...this._form.querySelectorAll(config.inputSelector)];
+    this._submitButton = this._form.querySelector(config.submitButtonSelector);
   }
 
   _showInputError(inputEl) {
@@ -31,7 +34,9 @@ export default class FormValidator {
   }
 
   _hasInvalidInput() {
-    return this._inputEls.some((inputEl) => !inputEl.validity.valid);
+    return this._inputEls.some((inputEl) => {
+      return !inputEl.validity.valid;
+    });
   }
 
   toggleButtonState() {
@@ -45,13 +50,15 @@ export default class FormValidator {
   }
 
   resetValidation() {
-    this._form.reset();
-    this.disableButton();
+    this._inputEls.forEach((inputEl) => {
+      this._hideInputError(inputEl);
+    });
+    this.toggleButtonState();
   }
 
   _setEventListeners() {
-    this._inputEls = [...this._form.querySelectorAll(this._inputSelector)];
-    this._submitButton = this._form.querySelector(this._submitButtonSelector);
+    //this._inputEls = [...this._form.querySelectorAll(config.inputSelector)];
+    //this._submitButton = this._form.querySelector(config.submitButtonSelector);
     //this.toggleButtonState();
 
     this._inputEls.forEach((inputEl) => {
@@ -63,9 +70,17 @@ export default class FormValidator {
   }
 
   enableValidation() {
-    this._form.addEventListener("submit", (e) => {
-      e.preventDefault();
-    });
+    //this._form.addEventListener("submit", (e) => {
+    //  e.preventDefault();
+    //});
     this._setEventListeners();
   }
 }
+
+const config = {
+  inputSelector: ".modal__form-input",
+  submitButtonSelector: ".modal__save",
+  inactiveButtonClass: "modal__save_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
