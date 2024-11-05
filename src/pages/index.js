@@ -91,14 +91,6 @@ profileEditButton.addEventListener("click", () => {
   profileEditPopup.open();
 });
 
-// Render Cards
-//cardSection.renderItems();
-
-//function renderCard(item, method = "addItem") {
-// const cardElement = createCard(item);
-// cardSection[method](cardElement);
-//}
-
 addCardFormValidator.enableValidation();
 editProfileFormValidator.enableValidation();
 
@@ -116,18 +108,14 @@ function createCard(cardData) {
 }
 
 function handleProfileEditSubmit(inputData) {
-  //userInfo.setUserInfo({
-  //  name: inputData.name,
-  // job: inputData.description,
-  //});
   profileEditPopup.renderLoading(true);
 
   api
-    .setUserInfo(inputData.title, inputData.description)
+    .setUserInfo(inputData.name, inputData.description)
     .then(() => {
       userInfo.setUserInfo({
-        name: inputData.title,
-        about: inputData.description,
+        name: inputData.name,
+        job: inputData.description,
       });
       profileEditPopup.close();
     })

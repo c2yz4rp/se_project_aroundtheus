@@ -18,7 +18,7 @@
         />
       </header>
       <main class="content">
-        <section class="profile">
+        <section class="profile page__section">
           <div class="profile__image-container">
             <img
               src="<%=require('./images/profile_pic.png')%>"
@@ -57,7 +57,7 @@
               type="text"
               name="name"
               id="profile-name-input"
-              class="modal__form-input"
+              class="modal__form-input modal__input"
               placeholder="Name"
               minlength="2"
               maxlength="40"
@@ -73,7 +73,7 @@
               type="text"
               name="description"
               id="profile-description-input"
-              class="modal__form-input"
+              class="modal__form-input modal__input"
               placeholder="Description"
               minlength="2"
               maxlength="200"
@@ -86,7 +86,7 @@
           </label>
           <button
             type="submit"
-            class="modal__save modal__save_disabled"
+            class="modal__save modal__save_disabled modal__button"
             disabled
           >
             Save
@@ -105,7 +105,7 @@
               type="text"
               name="title"
               id="card-title-input"
-              class="modal__form-input"
+              class="modal__form-input modal__input"
               placeholder="Title"
               minlength="1"
               maxlength="30"
@@ -121,7 +121,7 @@
               type="url"
               name="url"
               id="card-url-input"
-              class="modal__form-input"
+              class="modal__form-input modal__input"
               placeholder="Image URL"
               required
             />
@@ -131,7 +131,7 @@
             ></span>
           </label>
           <button
-            class="modal__save modal__save_disabled"
+            class="modal__save modal__save_disabled modal__button"
             type="submit"
             disabled
           >
@@ -146,19 +146,19 @@
         <button id="confirmation-close-modal" class="modal__close"></button>
         <h3 class="modal__heading">Are You Sure?</h3>
         <form class="modal__form" id="confirmation-card-form">
-          <button class="modal__button" type="submit">Yes</button>
+          <button class="modal__save modal__button" type="submit">Yes</button>
         </form>
       </div>
     </div>
 
     <div id="edit-avatar-modal" class="modal">
-      <div class="modal__container">
+      <div class="modal__container modal__container_avatar">
         <button class="modal__close" id="avatar-edit-modal"></button>
         <h3 class="modal__heading">Change Profile Picture</h3>
         <form class="modal__form" id="edit-avatar-form">
-          <label class="modal__label"
+          <label class="modal__form-label"
             ><input
-              class="modal__input modal__input_type_url"
+              class="modal__form-input modal__input_type_url"
               type="url"
               required
               name="link"
@@ -167,7 +167,12 @@
             />
             <span id="avatar-input-url-error" class="modal__error"></span>
           </label>
-          <button class="modal__button" type="submit" id="avatar-save-button">
+          <button
+            class="modal__save modal__save_disabled"
+            type="submit"
+            id="avatar-save-button"
+            disabled
+          >
             Submit
           </button>
         </form>

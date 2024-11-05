@@ -26,7 +26,7 @@ export default class Api {
     }).then(this._handleResponse);
   }
 
-  setUserInfo(name, job) {
+  setUserInfo(name, about) {
     return fetch(`${this._baseURL}/users/me`, {
       method: "PATCH",
       headers: this._headers,
@@ -34,7 +34,7 @@ export default class Api {
 
       body: JSON.stringify({
         name,
-        job,
+        about,
       }),
     }).then(this._handleResponse);
   }
