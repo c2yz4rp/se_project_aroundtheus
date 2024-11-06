@@ -87,7 +87,7 @@ profileEditButton.addEventListener("click", () => {
   const inputData = userInfo.getUserInfo();
   // console.log(inputData);
   profileNameInput.value = inputData.name;
-  profileDescriptionInput.value = inputData.job;
+  profileDescriptionInput.value = inputData.about;
   profileEditPopup.open();
 });
 
@@ -115,7 +115,7 @@ function handleProfileEditSubmit(inputData) {
     .then(() => {
       userInfo.setUserInfo({
         name: inputData.name,
-        job: inputData.description,
+        about: inputData.description,
       });
       profileEditPopup.close();
     })

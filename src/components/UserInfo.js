@@ -8,14 +8,14 @@ export default class UserInfo {
   getUserInfo() {
     return {
       name: this._nameElement.textContent,
-      job: this._jobElement.textContent,
+      about: this._jobElement.textContent,
       image: this._profileImage.textContent,
     };
   }
 
-  setUserInfo({ name, job }) {
+  setUserInfo({ name, about }) {
     this._nameElement.textContent = name;
-    this._jobElement.textContent = job;
+    this._jobElement.textContent = about;
   }
 
   updateProfileImage(image) {
