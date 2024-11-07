@@ -42,7 +42,6 @@ const userInfo = new UserInfo({
 const profileEditPopup = new PopupWithForm({
   popupSelector: "#profile-edit-modal",
   handleFormSubmit: handleProfileEditSubmit,
-  // editProfileFormValidator,
 });
 
 profileEditPopup.setEventListeners();
@@ -51,7 +50,6 @@ profileEditPopup.setEventListeners();
 const addCardFormPopup = new PopupWithForm({
   popupSelector: "#profile-add-modal",
   handleFormSubmit: handleAddCardSubmit,
-  // addCardFormValidator,
 });
 
 addCardFormPopup.setEventListeners();
@@ -83,7 +81,7 @@ addNewCardButton.addEventListener("click", () => {
 });
 
 profileEditButton.addEventListener("click", () => {
-  // editProfileFormValidator.resetValidation();
+  editProfileFormValidator.resetValidation();
   const inputData = userInfo.getUserInfo();
   // console.log(inputData);
   profileNameInput.value = inputData.name;
