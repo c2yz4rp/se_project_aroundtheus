@@ -9,7 +9,7 @@ export default class PopupWithForm extends Popup {
   }
 
   renderLoading(isLoading) {
-    this._submitButton = this._popupElement.querySelector(".modal__button");
+    this._submitButton = this._popupElement.querySelector(".modal__save");
     if (isLoading) {
       this._submitButton.textContent = "Saving...";
     } else {

@@ -13,6 +13,7 @@ import {
   addNewCardButton,
   addCardForm,
   profileEditForm,
+  addCardSubBttn,
 } from "../utils/constants.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
@@ -138,10 +139,11 @@ function handleAddCardSubmit(inputData) {
     .uploadCard({ name, link })
     .then((cardData) => {
       const card = createCard(cardData);
-      // cardAddForm.setLoading(false);
+
       cardSection.addItem(card);
       addCardFormPopup.close();
       addCardForm.reset();
+      addCardFormValidator.resetValidation();
     })
     .catch((error) => {
       console.error(error);
@@ -182,7 +184,7 @@ function handleImageProfileEditSubmit(data) {
     .then((res) => {
       userInfo.updateProfileImage(res);
       newProfileImageModal.close();
-      //profileImageForm.reset();
+      profileImageForm.reset();
       // newProfileImageModal.setLoading(false);
     })
     .catch((err) => {

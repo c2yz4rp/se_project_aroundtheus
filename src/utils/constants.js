@@ -45,7 +45,8 @@ export const cardUrlInput = document.querySelector("#card-url-input");
 export const addNewCardButton = document.querySelector(".profile__add-button");
 
 export const profileEditForm = profileEditModal.querySelector(".modal__form");
-export const addCardForm = profileaddModal.querySelector(".modal__form");
+export const addCardForm = profileaddModal.querySelector("#card-modal-form");
+export const addCardSubBttn = addCardForm.querySelector("modal__save_disabled");
 export const cardListEl = document.querySelector(".cards__list");
 export const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
