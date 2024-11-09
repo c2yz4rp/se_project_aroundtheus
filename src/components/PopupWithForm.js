@@ -1,18 +1,28 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
-  constructor(popupSelector, handleFormSubmit) {
-    super(popupSelector);
+  constructor({ popupSelector, handleFormSubmit }) {
+    super({ popupSelector });
     this._popupForm = this._popupElement.querySelector(".modal__form");
     this._handleFormSubmit = handleFormSubmit;
-    this._inputList = this._popupForm.querySelectorAll(".modal__form-input");
+    //this._inputList = this._popupForm.querySelectorAll(".modal__form-input");
   }
 
-  getForm() {
-    return this._popupForm;
+  renderLoading(isLoading) {
+    this._submitButton = this._popupElement.querySelector(".modal__save");
+    if (isLoading) {
+      this._submitButton.textContent = "Saving...";
+    } else {
+      this._submitButton.textContent = "Save";
+    }
   }
+
+  //getForm() {
+  //  return this._popupForm;
+  //}
 
   _getInputValues() {
+    this._inputList = this._popupElement.querySelectorAll(".modal__input");
     this._inputData = {};
     this._inputList.forEach((input) => {
       this._inputData[input.name] = input.value;
@@ -20,18 +30,18 @@ export default class PopupWithForm extends Popup {
     return this._inputData;
   }
 
-  setInputValues(data) {
-    this._inputList.forEach((input) => {
-      input.value = data[input.name];
-    });
-  }
+  //setInputValues(data) {
+  //  this._inputList.forEach((input) => {
+  //    input.value = data[input.name];
+  //  });
+  //}
 
   setEventListeners() {
+    super.setEventListeners();
     this._popupForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
       this._handleFormSubmit(this._getInputValues());
-      this.close();
+      // this.close();
     });
-    super.setEventListeners();
   }
 }
