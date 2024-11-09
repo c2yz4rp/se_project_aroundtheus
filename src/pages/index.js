@@ -100,8 +100,7 @@ function createCard(cardData) {
     "#card-template",
     handleImageClick,
     handleDeleteCardSubmit,
-    likeCard,
-    unlikeCard
+    likeCard
   );
   return card.generateCard();
 }
@@ -143,7 +142,7 @@ function handleAddCardSubmit(inputData) {
       cardSection.addItem(card);
       addCardFormPopup.close();
       addCardForm.reset();
-      addCardFormValidator.resetValidation();
+      addCardFormValidator.toggleButtonState();
     })
     .catch((error) => {
       console.error(error);
@@ -173,8 +172,8 @@ api
 
 //Avatar
 const profileImageForm = document.querySelector("#edit-avatar-form");
-const profileFormValidator = new FormValidator(config, profileImageForm);
-profileFormValidator.enableValidation();
+const avatarFormValidator = new FormValidator(config, profileImageForm);
+avatarFormValidator.enableValidation();
 
 function handleImageProfileEditSubmit(data) {
   newProfileImageModal.renderLoading(true);
@@ -185,7 +184,7 @@ function handleImageProfileEditSubmit(data) {
       userInfo.updateProfileImage(res);
       newProfileImageModal.close();
       profileImageForm.reset();
-      // newProfileImageModal.setLoading(false);
+      avatarFormValidator.toggleButtonState();
     })
     .catch((err) => {
       console.error(err);
@@ -246,17 +245,5 @@ function likeCard(card) {
     })
     .finally(() => {
       console.log("Like card complete");
-    });
-}
-
-function unlikeCard(card) {
-  api
-    .unlikeCard(card._id)
-    .then((res) => {
-      console.log(res);
-      // card.setIsLiked(false);
-    })
-    .catch((err) => {
-      console.error(err);
     });
 }

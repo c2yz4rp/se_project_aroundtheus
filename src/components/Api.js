@@ -30,7 +30,6 @@ export default class Api {
     return fetch(`${this._baseURL}/users/me`, {
       method: "PATCH",
       headers: this._headers,
-      "Content-Type": "application/json",
 
       body: JSON.stringify({
         name,
@@ -45,7 +44,6 @@ export default class Api {
     return fetch(`${this._baseURL}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
-      "Content-Type": "application/json",
 
       body: JSON.stringify({ avatar: link }),
     }).then(this._handleResponse);
@@ -55,7 +53,6 @@ export default class Api {
     return fetch(`${this._baseURL}/cards`, {
       method: "POST",
       headers: this._headers,
-      "Content-Type": "application/json",
 
       body: JSON.stringify({ name: name, link: link }),
     }).then(this._handleResponse);
